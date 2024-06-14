@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+
+# Django migrations
+*/migrations/*
+
+# If you are using Django's MEDIA_ROOT for file uploads
+media/
+
+# Static files
+staticfiles/
+
+# Virtual environment
+venv/
+
+# VS Code settings
+.vscode/
+
+# Python egg metadata
+*.egg-info/
+
+# Install log
+pip-log.txt
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Environments
+.env
+.env.local
+.env.*.local
+
+# Database files
+db.sqlite3
+
+# macOS
+.DS_Store
+
+# Thumbnails
+*.thumbnail
+
+# pytest
+.cache/
