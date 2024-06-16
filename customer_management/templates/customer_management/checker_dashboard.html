@@ -1,0 +1,43 @@
+{% extends 'customer_management/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-between mb-4">
+    <h2>Dashboard</h2>
+    <form method="get" class="form-inline">
+        <div class="form-group">
+            <label for="status" class="mr-2">Filter by Status:</label>
+            <select name="status" id="status" class="form-control">
+                <option value="">All</option>
+                <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+                <option value="approved" {% if status_filter == "approved" %}selected{% endif %}>Approved</option>
+                <option value="declined" {% if status_filter == "declined" %}selected{% endif %}>Declined</option>
+            </select>
+            <button type="submit" class="btn btn-primary ml-2">Filter</button>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    {% for customer in customers %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title">{{ customer.name }}</h5>
+                </div>
+                <div class="card-body">
+                    <img src="{{ customer.photo.url }}" class="img-fluid mb-2" alt="Customer Photo">
+                    <p><strong>Resume:</strong> <a href="{{ customer.resume.url }}">Download</a></p>
+                    <p><strong>Status:</strong> {{ customer.status.status }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'update_status' customer.id %}" class="btn btn-secondary">Update Status</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'customer_management/base.html' %}
+{% load static %}
+
+{% block title %}Upload Customer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Upload Customer</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                            <a href="{% url 'maker_dashboard' %}" class="btn btn-secondary ml-2">Back to Dashboard</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'customer_management/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-between mb-4">
+    <h2>Dashboard</h2>
+    <form method="get" class="form-inline">
+        <div class="form-group">
+            <label for="status" class="mr-2">Filter by Status:</label>
+            <select name="status" id="status" class="form-control">
+                <option value="">All</option>
+                <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+                <option value="approved" {% if status_filter == "approved" %}selected{% endif %}>Approved</option>
+                <option value="declined" {% if status_filter == "declined" %}selected{% endif %}>Declined</option>
+            </select>
+            <button type="submit" class="btn btn-primary ml-2">Filter</button>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    {% for customer in customers %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header text-center">
+                    <h5 class="card-title">{{ customer.name }}</h5>
+                </div>
+                <div class="card-body text-center">
+                    {% if customer.photo %}
+                        <img src="{{ customer.photo.url }}" class="img-fluid mb-2 rounded-circle" alt="Customer Photo" style="max-height: 200px;">
+                    {% else %}
+                        <img src="{% static 'default-user.png' %}" class="img-fluid mb-2 rounded-circle" alt="Default Photo" style="max-height: 200px;">
+                    {% endif %}
+                    <p><strong>Resume:</strong> <a href="{{ customer.resume.url }}" class="btn btn-link">Download</a></p>
+                    <p><strong>Status:</strong> <span class="badge badge-info">{{ customer.status.status }}</span></p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'edit_customer' customer.id %}" class="btn btn-secondary">Edit</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="row mt-4">
+    <div class="col text-center">
+        <a href="{% url 'upload_customer' %}" class="btn btn-primary">Upload Customer</a>
+        <a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a>
+    </div>
+</div>
+{% endblock %}

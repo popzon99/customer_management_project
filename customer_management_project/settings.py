@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'customer_management_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'customer_management', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,17 +70,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'customer_management_project.wsgi.application'
 
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'customer_management_db',
-    }
+    },
+    # The following is not needed unless you plan to use SQLite for some specific purposes.
+    # 'session': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
-
+# If using MongoDB for sessions, ensure the session engine is configured correctly:
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+SESSION_CACHE_ALIAS = 'default'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -122,3 +126,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'customer_management.User'
+
+
+
+
+# Redirect after login based on role
+LOGIN_REDIRECT_URL = '/customer_management/maker_dashboard/'  # Default for maker, override in view
+LOGOUT_REDIRECT_URL = '/customer_management/login/'  # Redirect after logout to login page
+
+# Session settings for MongoDB
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+SESSION_CACHE_ALIAS = 'default'
