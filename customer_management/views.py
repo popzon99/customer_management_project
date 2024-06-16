@@ -50,10 +50,11 @@ class CheckerDashboardView(LoginRequiredMixin, TemplateView):
         customers = Customer.objects.filter(maker__assigned_checker=self.request.user)
         if status_filter:
             customers = customers.filter(status__status=status_filter)
-        context['customers'] = customers
+        context['customers'] = customers.select_related('maker')
         context['status_filter'] = status_filter
         context['user'] = self.request.user
         return context
+
 
 class UploadCustomerView(LoginRequiredMixin, CreateView):
     model = Customer

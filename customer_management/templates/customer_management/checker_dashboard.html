@@ -1,11 +1,11 @@
 {% extends 'customer_management/base.html' %}
 {% load static %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Checker Dashboard{% endblock %}
 
 {% block content %}
 <div class="row justify-content-between mb-4">
-    <h2>Dashboard</h2>
+    <h2>Checker Dashboard</h2>
     <form method="get" class="form-inline">
         <div class="form-group">
             <label for="status" class="mr-2">Filter by Status:</label>
@@ -31,6 +31,7 @@
                     <img src="{{ customer.photo.url }}" class="img-fluid mb-2" alt="Customer Photo">
                     <p><strong>Resume:</strong> <a href="{{ customer.resume.url }}">Download</a></p>
                     <p><strong>Status:</strong> {{ customer.status.status }}</p>
+                    <p><strong>Maker:</strong> {{ customer.maker.username }}</p>
                 </div>
                 <div class="card-footer">
                     <a href="{% url 'update_status' customer.id %}" class="btn btn-secondary">Update Status</a>

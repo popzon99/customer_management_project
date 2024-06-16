@@ -1,58 +1,62 @@
-{% extends 'customer_management/base.html' %}
-{% load static %}
-
-{% block title %}Update Status{% endblock %}
-
-{% block extra_css %}
-<style>
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        background-color: #f8f9fa;
-    }
-    .update-status-container {
-        max-width: 500px;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 50px; /* To provide some space below the navbar */
-    }
-    .update-status-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .update-status-container .form-group {
-        margin-bottom: 15px;
-    }
-    .update-status-container .btn {
-        width: 100%;
-    }
-    .update-status-container .back-link {
-        display: block;
-        text-align: center;
-        margin-top: 10px;
-    }
-</style>
-{% endblock %}
-
-{% block content %}
-<div class="update-status-container">
-    <h2>Update Status</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-    </form>
-    {% if user.role == 'checker' %}
-        <a href="{% url 'checker_dashboard' %}" class="back-link btn btn-secondary">Back to Dashboard</a>
-    {% else %}
-        <a href="{% url 'maker_dashboard' %}" class="back-link btn btn-secondary">Back to Dashboard</a>
-    {% endif %}
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Update Status</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .update-status-container {
+            max-width: 500px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px; /* To provide some space below the navbar */
+        }
+        .update-status-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .update-status-container .form-group {
+            margin-bottom: 15px;
+        }
+        .update-status-container .btn {
+            width: 100%;
+        }
+        .update-status-container .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-status-container">
+        <h2>Update Status</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        {% if user.role == 'checker' %}
+            <a href="{% url 'checker_dashboard' %}" class="back-link btn btn-secondary">Back to Dashboard</a>
+        {% else %}
+            <a href="{% url 'maker_dashboard' %}" class="back-link btn btn-secondary">Back to Dashboard</a>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
